@@ -19,6 +19,24 @@ processor and a pipelined processor.
 - Dedicated flag register to resolve branch-flag timing hazard
 - Verified on Zedboard (Xilinx Zynq-7000) FPGA
 
+- **Modules:**
+| Module | Description |
+|--------|-------------|
+| `top.v` | Top-level datapath |
+| `fsm.v` | 5-state FSM controller |
+| `ALU.v` | 32-operation ALU |
+| `PC.v` | Program counter |
+| `branch.v` | Branch target computation |
+| `register_file.v` | 4 × 16-bit register file |
+| `instruction_memory.v` | 256 × 16-bit ROM |
+| `data_memory.v` | 256 × 16-bit RAM |
+| `instruction_decode.v` | Instruction field extractor |
+| `instruction_register.v` | IR latch |
+| `imm_extend.v` | 5-bit sign extender |
+| `flag_reg.v` | Condition flag register |
+| `reg_A/B/ALUOUT/MDR.v` | Intermediate pipeline registers |
+| `mux_2to1.v` | 2:1 MUX |
+
 ## Pipelined Architecture
 - 5-stage pipeline: IF → ID → EX → MEM → WB
 - Harvard architecture with BRAM instruction memory
