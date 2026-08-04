@@ -16,10 +16,10 @@ processor and a pipelined processor.
 
 ### 1. Multicycle Processor (`/multicycle`)
 
-A multicycle implementation where each instruction takes exactly 5 clock cycles to complete.
+A multicycle implementation where each instruction takes exactly 6 clock cycles to complete.
 
 **Architecture:**
-- 5-state FSM controller (FETCH → DECODE → EXECUTE → MEMORY → WRITEBACK)
+- 6-state FSM controller (FETCH_WAIT → FETCH → DECODE → EXECUTE → MEMORY → WRITEBACK)
 - Intermediate registers: Instruction Register (IR), Reg A, Reg B, ALU OUT, MDR
 - Separate instruction and data memories (256 × 16-bit each)
 - Dedicated branch unit for PC computation
@@ -43,7 +43,7 @@ A multicycle implementation where each instruction takes exactly 5 clock cycles 
 | `reg_A/B/ALUOUT/MDR.v` | Intermediate pipeline registers |
 | `mux_2to1.v` | 2:1 MUX |
 
-**Verified instructions:** All 32 instructions verified in simulation and tested on Nexys A7 FPGA hardware.
+**Verified instructions:** All 32 instructions verified in simulation and tested on Zedboard.
 
 ---
 
