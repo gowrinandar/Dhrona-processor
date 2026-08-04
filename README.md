@@ -2,7 +2,7 @@
 
 A 16-bit processor implemented in Verilog HDL from a provided ISA 
 specification, developed as part of a CDAC internship project.
-The design was implemented in two architectures — a multicycle 
+The design was implemented in two architectures - a multicycle 
 processor and a pipelined processor.
 
 ## ISA Overview
@@ -94,14 +94,14 @@ A 5-stage pipelined implementation with full hazard handling, achieving single-c
 ## Tools
 - Verilog HDL
 - Xilinx Vivado
-- Zedboard (Zynq-7000) — multicycle
-- Nexys FPGA — pipelined
+- Zedboard (Zynq-7000) - multicycle
+- Nexys FPGA - pipelined
 
 ## Key Design Decisions
-- **Flag register** — flags latched only after arithmetic/logical 
+- **Flag register** - flags latched only after arithmetic/logical 
   instructions, preventing branch from reading stale ALU outputs
-- **FETCH_WAIT state** — extra FSM state in multicycle to absorb 
+- **FETCH_WAIT state** - extra FSM state in multicycle to absorb 
   BRAM's 1-cycle synchronous read latency
-- **Predict-not-taken** — simple branch strategy; flush on misprediction
-- **Harvard architecture** — separate instruction ROM and data RAM 
+- **Predict-not-taken** - simple branch strategy; flush on misprediction
+- **Harvard architecture** - separate instruction ROM and data RAM 
   enabling simultaneous fetch and memory access
