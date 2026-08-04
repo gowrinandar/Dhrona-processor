@@ -1,0 +1,20 @@
+set_property PACKAGE_PIN E3 [get_ports clk]
+set_property IOSTANDARD LVCMOS33 [get_ports clk]
+create_clock -period 15.000 [get_ports clk]
+
+set_property PACKAGE_PIN N17 [get_ports reset]
+set_property IOSTANDARD LVCMOS33 [get_ports reset]
+
+set_property PACKAGE_PIN V11 [get_ports halt]
+set_property IOSTANDARD LVCMOS33 [get_ports halt]
+
+set_property PACKAGE_PIN U16 [get_ports {o_p[7]}]
+set_property PACKAGE_PIN U17 [get_ports {o_p[6]}]
+set_property PACKAGE_PIN V17 [get_ports {o_p[5]}]
+set_property PACKAGE_PIN R18 [get_ports {o_p[4]}]
+set_property PACKAGE_PIN N14 [get_ports {o_p[3]}]
+set_property PACKAGE_PIN J13 [get_ports {o_p[2]}]
+set_property PACKAGE_PIN K15 [get_ports {o_p[1]}]
+set_property PACKAGE_PIN H17 [get_ports {o_p[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {o_p[*]}]
+set_input_delay -clock clk 0 [get_ports reset]
