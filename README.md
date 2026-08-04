@@ -12,14 +12,20 @@ processor and a pipelined processor.
 - 8-bit sign-extended offset for branches and memory access
 - Harvard architecture — separate instruction and data memory
 
-## Multicycle Architecture
-- 6-state FSM: FETCH_WAIT → FETCH → DECODE → EXECUTE → MEMORY → WRITEBACK
-- BRAM-based instruction memory initialized via COE file
-- FETCH_WAIT state added to handle BRAM read latency
-- Dedicated flag register to resolve branch-flag timing hazard
-- Verified on Zedboard (Xilinx Zynq-7000) FPGA
+---
 
-  **Modules:**
+### 1. Multicycle Processor (`/multicycle`)
+
+A multicycle implementation where each instruction takes exactly 5 clock cycles to complete.
+
+**Architecture:**
+- 5-state FSM controller (FETCH → DECODE → EXECUTE → MEMORY → WRITEBACK)
+- Intermediate registers: Instruction Register (IR), Reg A, Reg B, ALU OUT, MDR
+- Separate instruction and data memories (256 × 16-bit each)
+- Dedicated branch unit for PC computation
+- Flag register for condition codes (zero, lt, zero_reg)
+
+**Modules:**
 | Module | Description |
 |--------|-------------|
 | `top.v` | Top-level datapath |
@@ -36,6 +42,10 @@ processor and a pipelined processor.
 | `flag_reg.v` | Condition flag register |
 | `reg_A/B/ALUOUT/MDR.v` | Intermediate pipeline registers |
 | `mux_2to1.v` | 2:1 MUX |
+
+**Verified instructions:** All 32 instructions verified in simulation and tested on Nexys A7 FPGA hardware.
+
+---
 
 ## Pipelined Architecture
 - 5-stage pipeline: IF → ID → EX → MEM → WB
