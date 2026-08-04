@@ -1,4 +1,4 @@
-# Dhrona — 16-bit Processor
+# Dhrona - 16-bit Processor
 
 A 16-bit processor implemented in Verilog HDL from a provided ISA 
 specification, developed as part of a CDAC internship project.
@@ -10,7 +10,7 @@ processor and a pipelined processor.
 - 32 instructions across 6 types: R-type, I-type, Load, Store, Branch, Halt
 - 8 general-purpose registers (r0-r7), r0 hardwired to zero
 - 8-bit sign-extended offset for branches and memory access
-- Harvard architecture — separate instruction and data memory
+- Harvard architecture - separate instruction and data memory
 
 ---
 
