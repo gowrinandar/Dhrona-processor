@@ -47,15 +47,49 @@ A multicycle implementation where each instruction takes exactly 5 clock cycles 
 
 ---
 
-## Pipelined Architecture
-- 5-stage pipeline: IF → ID → EX → MEM → WB
-- Harvard architecture with BRAM instruction memory
-- **Data hazard resolution** via operand forwarding (EX/MEM and MEM/WB paths)
-- **Load-use hazard detection** with automatic bubble insertion
-- **Control hazard handling** via flush-on-taken with predict-not-taken
-- **Flag forwarding** eliminating NOPs between arithmetic and branch instructions
-- r0 hardwired to zero — writes to r0 ignored, flags not updated on r0 destination
-- Verified on Nexys FPGA
+### 2. Pipelined Processor (`/pipeline`)
+
+A 5-stage pipelined implementation with full hazard handling, achieving single-cycle throughput after pipeline fill.
+
+**Architecture:**
+- 5-stage pipeline: FETCH → DECODE → EXECUTE → MEMORY → WRITEBACK
+- Pipeline registers: IF/ID, ID/EX, EX/MEM, MEM/WB
+- r0 hardwired to 0 (RISC-V convention)
+- 8 general-purpose registers (r0-r7, r0 fixed at 0)
+
+**Hazard Handling:**
+
+| Hazard Type | Solution |
+|-------------|----------|
+| Data hazard (RAW) | Forwarding unit — routes EX/MEM and MEM/WB results directly to ALU inputs |
+| Load-use hazard | Hazard detection unit — inserts 1-cycle stall + forwarding from MEM/WB |
+| Control hazard | Flush on taken — flushes IF/ID and ID/EX when branch resolves in EXECUTE |
+
+**Modules:**
+| Module | Description |
+|--------|-------------|
+| `top.v` | Top-level datapath |
+| `PC.v` | Program counter with branch and stall support |
+| `IF_ID_reg.v` | IF/ID pipeline register with flush and stall |
+| `ID_EX_reg.v` | ID/EX pipeline register with flush and bubble |
+| `EX_MEM_reg.v` | EX/MEM pipeline register |
+| `MEM_WB_reg.v` | MEM/WB pipeline register |
+| `forwarding_unit.v` | Detects and resolves data hazards via forwarding |
+| `load_use.v` | Detects load-use hazards and generates stall signal |
+| `control_unit.v` | Combinational control signal generator |
+| `ALU.v` | 32-operation ALU |
+| `branch.v` | Branch condition evaluation and target computation |
+| `register_file.v` | 8 × 16-bit register file (r0 hardwired to 0) |
+| `instruction_memory.v` | 256 × 16-bit ROM |
+| `data_memory.v` | 256 × 16-bit RAM |
+| `instruction_decode.v` | Instruction field extractor |
+| `flag_reg.v` | Condition flag register |
+| `extend.v` | 5-bit immediate and 8-bit offset sign extender |
+| `mux2to1.v` | 2:1 MUX |
+
+**Verified:** Forwarding, load-use stall, and branch flush verified in simulation.
+
+---
 
 ## Tools
 - Verilog HDL
