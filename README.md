@@ -29,14 +29,6 @@ processor and a pipelined processor.
 - r0 hardwired to zero — writes to r0 ignored, flags not updated on r0 destination
 - Verified on Nexys FPGA
 
-## Verified Programs
-| Program | Result | Notes |
-|---------|--------|-------|
-| Fibonacci | r1 = 34 | 8th Fibonacci number |
-| GCD | r1 = 4 | GCD(12, 8) |
-| Power of 2 | r1 = 256 | 2^8 via repeated doubling |
-| Forwarding test | r3 = 8 | Back-to-back dependent instructions |
-
 ## Tools
 - Verilog HDL
 - Xilinx Vivado
