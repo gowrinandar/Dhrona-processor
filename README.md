@@ -19,7 +19,7 @@ processor and a pipelined processor.
 - Dedicated flag register to resolve branch-flag timing hazard
 - Verified on Zedboard (Xilinx Zynq-7000) FPGA
 
-- **Modules:**
+  **Modules:**
 | Module | Description |
 |--------|-------------|
 | `top.v` | Top-level datapath |
